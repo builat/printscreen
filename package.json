@@ -4,8 +4,8 @@
   "description": "Simple zero dep package for printscreening DOM elements",
   "main": "index.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/builat/printscreen"
+    "type": "git",
+    "url": "https://github.com/builat/printscreen"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,8 @@
     "dom-image"
   ],
   "author": "builat",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  }
 }

@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "allowJs": false,
+      "allowSyntheticDefaultImports": true,
+      "checkJs": false,
+      "outDir": "./build/",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "lib": ["esnext", "dom", "dom.iterable"],
+      "module": "esnext",
+      "target": "es2018",
+      "preserveSymlinks": true,
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "strict": true,
+      "resolveJsonModule": true
+    },
+    "include": ["./src/**/*", "types.d.ts"],
+    "exclude": ["node_modules/"]
+}
+
+  
