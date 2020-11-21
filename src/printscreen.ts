@@ -9,6 +9,8 @@
  * @example await printScreen(reactRef.current)
  */
 
+import { PrintScreenParamsT } from "./types";
+
 import {
   createFontFace,
   validHTMLfromString,
@@ -17,10 +19,10 @@ import {
 } from "./helpers";
 import { DATA_IMAGE, IMAGE_JPEG } from "./constants";
 
-export async function printScreen(
+async function printScreen(
   src: string | HTMLElement,
   params: PrintScreenParamsT
-) {
+): Promise<string> {
   const element: HTMLElement | null =
     typeof src === "string" ? document.querySelector(src) : src;
   const {

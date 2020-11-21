@@ -1,3 +1,5 @@
+import { FontCfg, FontFaceTemplate, SvgDementions } from "./types";
+
 function fontPromiseCreator(fontCfg: FontCfg): Promise<FontCfg> {
   const { uri, ...rest } = fontCfg;
   return new Promise((resolve, reject) =>
