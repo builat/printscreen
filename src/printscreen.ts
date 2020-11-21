@@ -4,7 +4,7 @@
  * @returns promise with base64 encoded image or undefined in case element not found
  *
  * @example await printScreen("#root")
- * @example await printScreeen(".anotherQerySelector")
+ * @example await printScreeen(".anotherQzerySelector")
  * @example await printScreen(document.querySelector("#root"))
  * @example await printScreen(reactRef.current)
  */
@@ -15,6 +15,7 @@ import {
   getFontBlobs,
   getSVGString,
 } from "./helpers";
+import { DATA_IMAGE, IMAGE_JPEG } from "./constants";
 
 export async function printScreen(
   src: string | HTMLElement,
@@ -39,7 +40,7 @@ export async function printScreen(
    */
   const blobedFonts = await getFontBlobs(fonts, fontFaceTemplate);
 
-  const svgString = getSVGString(
+  const domAsSVGString = getSVGString(
     { width: offsetWidth * scale, height: offsetHeight * scale },
     blobedFonts,
     validHTMLfromString(outerHTML),
@@ -54,16 +55,14 @@ export async function printScreen(
 
   const tempImg = document.createElement("img");
 
-  tempImg.src = "data:image/svg+xml," + encodeURIComponent(svgString);
+  tempImg.src = `${DATA_IMAGE}, ${encodeURIComponent(domAsSVGString)}`;
 
   return new Promise((resolve) => {
     tempImg.onload = (e: Event) => {
       if (ctx && e.target) {
         ctx.drawImage(e.target as CanvasImageSource, 0, 0);
         resolve(
-          canvas
-            .toDataURL("image/jpeg")
-            .replace("image/jpeg", "image/octet-stream")
+          canvas.toDataURL(IMAGE_JPEG).replace(IMAGE_JPEG, "image/octet-stream")
         );
         // Cleanup memory to make job of GC a little bit easy
         tempImg.remove();
