@@ -1,17 +1,20 @@
 {
   "name": "@builat/printscreen",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Simple zero dep package for printscreening DOM elements",
   "main": "./build/index.js",
-  "files": ["build/"],
+  "files": [
+    "build/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/builat/printscreen.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\"",
+    "clean": "rimraf build",
     "build": "tsc",
-    "prepublish": "tsc"
+    "prepare": "npm run clean && npm run build"
   },
   "keywords": [
     "printscreen",
@@ -21,11 +24,11 @@
   "author": "builat",
   "license": "ISC",
   "devDependencies": {
+    "rimraf": "^3.0.2",
     "typescript": "^4.1.2"
   },
   "bugs": {
     "url": "https://github.com/builat/printscreen/issues"
   },
-  "homepage": "https://github.com/builat/printscreen#readme",
-  "dependencies": {}
+  "homepage": "https://github.com/builat/printscreen#readme"
 }
