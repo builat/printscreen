@@ -19,9 +19,15 @@ import {
 } from "./helpers";
 import { DATA_IMAGE, IMAGE_JPEG } from "./constants";
 
+const staticPrintscreenParams = {
+  scale: 1,
+  underlayStyle: "",
+  fonts: [],
+  fontFaceTemplate: createFontFace,
+};
 async function printScreen(
   src: string | HTMLElement,
-  params: PrintScreenParamsT
+  params: PrintScreenParamsT = staticPrintscreenParams
 ): Promise<string> {
   const element: HTMLElement | null =
     typeof src === "string" ? document.querySelector(src) : src;
