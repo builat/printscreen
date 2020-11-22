@@ -1,8 +1,9 @@
 {
   "name": "@builat/printscreen",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "Simple zero dep package for printscreening DOM elements",
   "main": "./build/index.js",
+  "files": ["build/"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/builat/printscreen.git"

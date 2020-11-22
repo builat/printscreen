@@ -5,7 +5,7 @@
       "checkJs": false,
       "declaration": true,
       "outDir": "./build/",
-      "sourceMap": true,
+      "sourceMap": false,
       "noImplicitAny": true,
       "lib": ["esnext", "dom", "dom.iterable"],
       "module": "commonjs",
