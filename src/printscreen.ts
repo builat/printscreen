@@ -4,7 +4,7 @@
  * @returns promise with base64 encoded image or undefined in case element not found
  *
  * @example await printScreen("#root")
- * @example await printScreeen(".anotherQzerySelector")
+ * @example await printScreeen(".anotherQuerySelector")
  * @example await printScreen(document.querySelector("#root"))
  * @example await printScreen(reactRef.current)
  */
