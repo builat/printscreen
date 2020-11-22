@@ -19,6 +19,39 @@ function fontPromiseCreator(fontCfg: FontCfg): Promise<FontCfg> {
   );
 }
 
+function imgPromiseCreator(imgHtml: HTMLImageElement): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      return;
+    }
+    const img = document.createElement("img");
+    img.onload = (e: Event) => {
+      const { target } = e;
+      if (!target) {
+        throw new Error("False positive image link");
+      }
+      canvas.width = (target as HTMLImageElement).naturalWidth;
+      canvas.height = (target as HTMLImageElement).naturalHeight;
+      ctx.drawImage(target as HTMLImageElement, 0, 0);
+      resolve(canvas.toDataURL());
+      canvas.remove();
+      img.remove();
+    };
+    img.src = imgHtml.src;
+  });
+}
+
+export async function injectImageBlobs(target: HTMLElement) {
+  const targetClone = target.cloneNode(true) as HTMLElement; // true stands for deep clone
+  const allImages = Array.from(targetClone.querySelectorAll("img"));
+  const promisesToBeExecuted = allImages.map((image) =>
+    imgPromiseCreator(image).then((newSrc) => (image.src = newSrc))
+  );
+  return Promise.all(promisesToBeExecuted).then(() => targetClone.outerHTML);
+}
+
 export function validHTMLfromString(rawString: string): string {
   return new XMLSerializer().serializeToString(
     new DOMParser().parseFromString(rawString, "text/html")
@@ -56,7 +89,7 @@ export function createFontFace(fontCfg: FontCfg) {
       `;
 }
 
-export function getSVGString(
+export function finalSvgString(
   { width, height }: SvgDementions,
   fonts: string,
   html: string,

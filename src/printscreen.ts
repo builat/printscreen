@@ -15,7 +15,8 @@ import {
   createFontFace,
   validHTMLfromString,
   getFontBlobs,
-  getSVGString,
+  injectImageBlobs,
+  finalSvgString,
 } from "./helpers";
 import { DATA_IMAGE, IMAGE_JPEG } from "./constants";
 
@@ -25,7 +26,7 @@ const staticPrintscreenParams = {
   fonts: [],
   fontFaceTemplate: createFontFace,
 };
-async function printScreen(
+export async function printScreen(
   src: string | HTMLElement,
   params: PrintScreenParamsT = staticPrintscreenParams
 ): Promise<string> {
@@ -40,18 +41,18 @@ async function printScreen(
   if (!element) {
     throw new Error("No element found");
   }
-  const { outerHTML, offsetWidth, offsetHeight } = element;
+  const { offsetWidth, offsetHeight } = element;
 
   /* 
     We using `foreignObject` approach, so no external links
     only blobed things could be used inside
    */
   const blobedFonts = await getFontBlobs(fonts, fontFaceTemplate);
-
-  const domAsSVGString = getSVGString(
+  const htmlWithInlinedImages = await injectImageBlobs(element);
+  const domAsSVGString = finalSvgString(
     { width: offsetWidth * scale, height: offsetHeight * scale },
     blobedFonts,
-    validHTMLfromString(outerHTML),
+    validHTMLfromString(htmlWithInlinedImages),
     underlayStyle
   );
 
@@ -79,5 +80,3 @@ async function printScreen(
     };
   });
 }
-
-export default printScreen;
