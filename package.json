@@ -1,14 +1,14 @@
 {
-  "name": "domscreenshot",
-  "version": "0.0.1",
+  "name": "@builat/printscreen",
+  "version": "0.0.3",
   "description": "Simple zero dep package for printscreening DOM elements",
-  "main": "index.js",
+  "main": "./build/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/builat/printscreen.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "build": "tsc",
     "prepublish": "tsc"
   },
@@ -26,8 +26,5 @@
     "url": "https://github.com/builat/printscreen/issues"
   },
   "homepage": "https://github.com/builat/printscreen#readme",
-  "directories": {
-    "example": "examples"
-  },
   "dependencies": {}
 }
