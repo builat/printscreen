@@ -1,6 +1,6 @@
 {
   "name": "@builat/printscreen",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "Simple zero dep package for printscreening DOM elements",
   "main": "./build/index.js",
   "files": [

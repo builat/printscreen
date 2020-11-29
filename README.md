@@ -4,6 +4,53 @@
 
 - create zero dep util to make printscreen of DOM elements.
 
+### Signature
+
+```typescript
+async function printScreen(
+  src: string | HTMLElement,
+  params: PrintScreenParamsT
+): Promise<string>;
+```
+
+```typescript
+type PrintScreenParamsT = {
+  scale?: number;
+  fonts?: FontCfg[];
+  underlayStyle?: string;
+  fontFaceTemplate: FontFaceTemplate;
+};
+```
+
+- `scale` is multiplyer for original image width and height
+- `fonts` is config for fonts added by `<link />`
+
+```typescript
+export type FontCfg<T = unknown> = {
+  uri: string;
+  format: string;
+  name: string;
+  options?: T;
+};
+```
+
+- `underlayStyle` is raw string for css. like `background-color: black;` This needed when you printscreen the element whithout background. So with this prop you can provide style for parent div.
+- `fontFaceTemplate` is template function for attaching fonts listed in `fonts` by default it looks like:
+
+```typescript
+function createFontFace(fontCfg: FontCfg) {
+  const { name, format, uri } = fontCfg;
+  return `
+        @font-face {
+          font-family: "${name}";
+          src: url(${uri}) format("${format}");
+          font-weight: normal;
+          font-style: normal;
+        }
+      `;
+}
+```
+
 ### Usage
 
 - `npm install @builat/printscreen`
