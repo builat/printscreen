@@ -92,3 +92,13 @@ function App() {
 
 export default App;
 ```
+
+## Ok I want to convert base64 image to bynary. How?
+
+```typescript
+const imageWithPrefix = await printScreen("#root");
+const [prefix, base64Image] = Buffer.from(imageWithPrefix, "utf-8")
+  .toString("utf-8")
+  .split(",");
+const binaryImage = Buffer.from(base64Image, "base64");
+```
