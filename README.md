@@ -93,7 +93,7 @@ function App() {
 export default App;
 ```
 
-## Ok I want to convert base64 image to bynary. How?
+## Ok I want to convert function output to binary image. How?
 
 ```typescript
 const imageWithPrefix = await printScreen("#root");
